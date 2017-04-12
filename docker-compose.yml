@@ -11,11 +11,31 @@ services:
       - bin/zookeeper-server-start.sh
       - config/zookeeper.properties
 
-  kafka-broker-1:
+  kafka-broker-0:
     image: java:8
     volumes:
       - ./kafka:/kafka
       - ./server.properties:/kafka/config/server.properties
+    working_dir: /kafka
+    command:
+      - bin/kafka-server-start.sh
+      - config/server.properties
+
+  kafka-broker-1:
+    image: java:8
+    volumes:
+      - ./kafka:/kafka
+      - ./server.1.properties:/kafka/config/server.properties
+    working_dir: /kafka
+    command:
+      - bin/kafka-server-start.sh
+      - config/server.properties
+
+  kafka-broker-2:
+    image: java:8
+    volumes:
+      - ./kafka:/kafka
+      - ./server.2.properties:/kafka/config/server.properties
     working_dir: /kafka
     command:
       - bin/kafka-server-start.sh
