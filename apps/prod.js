@@ -28,7 +28,7 @@
 
      */
      payloads = [
-         { topic: 'test', messages: 'This is the First Message I am sending', partition: 0 },
+         { topic: 'coolio', messages: 'This is the First Message I am sending', partition: 0 },
      ];
 
 
