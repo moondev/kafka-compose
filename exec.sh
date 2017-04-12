@@ -11,7 +11,7 @@ bl="--broker-list kafka-broker-1:9092"
 
 #list topics
 
-#docker exec ktest_kafka-client_1 ./kafka-topics.sh --list --zookeeper zookeeper:2181
+# ./kafka-topics.sh --list --zookeeper zookeeper:2181
 
 #docker exec -it ktest_kafka-client_1 ./kafka-console-producer.sh --broker-list kafka-broker-1:9092 --topic test
 
