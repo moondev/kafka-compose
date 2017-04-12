@@ -1,6 +1,7 @@
 version: '2'
 
 services:
+
   zookeeper:
     image: java:8
     volumes:
@@ -10,6 +11,8 @@ services:
     command:
       - bin/zookeeper-server-start.sh
       - config/zookeeper.properties
+    ports:
+      - 2181:2181
 
   kafka-broker-0:
     image: java:8
@@ -20,6 +23,8 @@ services:
     command:
       - bin/kafka-server-start.sh
       - config/server.properties
+    ports:
+      - 9092:9092
 
   kafka-broker-1:
     image: java:8
@@ -30,6 +35,8 @@ services:
     command:
       - bin/kafka-server-start.sh
       - config/server.properties
+    ports:
+      - 9093:9093
 
   kafka-broker-2:
     image: java:8
@@ -40,14 +47,23 @@ services:
     command:
       - bin/kafka-server-start.sh
       - config/server.properties
+    ports:
+      - 9094:9094
 
-  kafka-client:
-    image: java:8
-    volumes:
-      - ./kafka:/kafka
-    working_dir: /kafka/bin
-    command:
-      - sleep
-      - infinity
-  
-        
+  # kafka-client:
+  #   image: java:8
+  #   volumes:
+  #     - ./kafka:/kafka
+  #   working_dir: /kafka/bin
+  #   command:
+  #     - sleep
+  #     - infinity
+
+  # traefik:
+  #   image: emilevauge/traefik
+  #   volumes:
+  #     - ./traefik.toml:/traefik.toml
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   ports:
+  #     - 8080:8080
+  #     - 80:80
