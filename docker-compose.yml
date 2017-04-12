@@ -11,8 +11,8 @@ services:
     command:
       - bin/zookeeper-server-start.sh
       - config/zookeeper.properties
-    ports:
-      - 2181:2181
+    # ports:
+    #   - 2181:2181
 
   kafka-broker-0:
     image: java:8
@@ -35,8 +35,8 @@ services:
     command:
       - bin/kafka-server-start.sh
       - config/server.properties
-    ports:
-      - 9093:9093
+    # ports:
+    #   - 9093:9093
 
   kafka-broker-2:
     image: java:8
@@ -47,8 +47,17 @@ services:
     command:
       - bin/kafka-server-start.sh
       - config/server.properties
-    ports:
-      - 9094:9094
+    # ports:
+    #   - 9094:9094
+
+  producer:
+    image: node:6
+    volumes:
+      - ./apps:/app
+    working_dir: /app
+    command: /app/start.sh
+    # ports:
+    #   - 3000:3000
 
   # kafka-client:
   #   image: java:8
