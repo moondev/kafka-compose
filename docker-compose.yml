@@ -76,6 +76,9 @@ services:
       - sleep
       - infinity
 
+  mongo:
+    image: mongo:latest
+
   # traefik:
   #   image: emilevauge/traefik
   #   volumes:

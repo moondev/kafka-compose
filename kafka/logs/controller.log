@@ -102,3 +102,7 @@
 [2017-04-13 00:30:27,878] DEBUG [Partition state machine on Controller 0]: Live assigned replicas for partition [coolio,0] are: [List(0)] (kafka.controller.PartitionStateMachine)
 [2017-04-13 00:30:27,881] DEBUG [Partition state machine on Controller 0]: Initializing leader and isr for partition [coolio,0] to (Leader:0,ISR:0,LeaderEpoch:0,ControllerEpoch:1) (kafka.controller.PartitionStateMachine)
 [2017-04-13 00:30:27,970] INFO [Replica state machine on controller 0]: Invoking state change to OnlineReplica for replicas [Topic=coolio,Partition=0,Replica=0] (kafka.controller.ReplicaStateMachine)
+[2017-04-13 00:34:03,044] TRACE [Controller 0]: checking need to trigger partition rebalance (kafka.controller.KafkaController)
+[2017-04-13 00:34:03,045] DEBUG [Controller 0]: preferred replicas by broker Map(0 -> Map([coolio,0] -> List(0))) (kafka.controller.KafkaController)
+[2017-04-13 00:34:03,049] DEBUG [Controller 0]: topics not in preferred replica Map() (kafka.controller.KafkaController)
+[2017-04-13 00:34:03,051] TRACE [Controller 0]: leader imbalance ratio for broker 0 is 0.000000 (kafka.controller.KafkaController)
