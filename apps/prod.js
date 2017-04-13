@@ -9,6 +9,11 @@ var rets = 0;
 var producer = new HighLevelProducer(client);
 
 producer.on('ready', function () {
+
+producer.createTopics(['coolio'], false, function (err, data) {
+    console.log(data);
+});
+
   setInterval(send, 100);
 });
 
