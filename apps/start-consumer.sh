@@ -2,10 +2,10 @@
 
 npm install -g nodemon
 
-# npm install kafka-node
+npm install kafka-node
 
-# npm install optimist
+npm install optimist
 
-# npm install sleep
+npm install sleep
 
 nodemon consumer.js
