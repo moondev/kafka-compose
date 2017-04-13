@@ -1,42 +1,28 @@
-/*
-     Basic producer to send data to kafka from nodejs.
-     More Information Here : https://www.npmjs.com/package/kafka-node
- */
+var kafka = require('kafka-node');
+var HighLevelProducer = kafka.HighLevelProducer;
+var Client = kafka.Client;
+var client = new Client('zookeeper:2181');
+var argv = require('optimist').argv;
+var topic = argv.topic || 'coolio';
+var count = 1000;
+var rets = 0;
+var producer = new HighLevelProducer(client);
 
- //    Using kafka-node - really nice library
- //    create a producer and connect to a Zookeeper to send the payloads.
- var kafka = require('kafka-node'),
-     Producer = kafka.Producer,
-     client = new kafka.Client('zookeeper:2181'),
-     producer = new Producer(client);
+producer.on('ready', function () {
+  setInterval(send, 100);
+});
 
-     /*
-         Creating a payload, which takes below information
-         'topic'     -->    this is the topic we have created in kafka. (test)
-         'messages'     -->    data which needs to be sent to kafka. (JSON in our case)
-         'partition' -->    which partition should we send the request to. (default)
+producer.on('error', function (err) {
+  console.log('error', err);
+});
 
-                         example command to create a topic in kafka: 
-                         [kafka@kafka kafka]$ bin/kafka-topics.sh \
-                                     --create --zookeeper localhost:2181 \
-                                     --replication-factor 1 \
-                                     --partitions 1 \
-                                     --topic test
-
-                         If there are multiple partition, then we optimize the code here,
-                         so that we send request to different partitions. 
-
-     */
-     payloads = [
-         { topic: 'coolio', messages: 'This is the First Message I am sending', partition: 0 },
-     ];
-
-
- //    producer 'on' ready to send payload to kafka.
- producer.on('ready', function(){
-     producer.send(payloads, function(err, data){
-         console.log(data)
-     });
- });
-
- producer.on('error', function(err){});
+function send () {
+  var message = Math.random().toString(36).substring(7);
+  producer.send([
+    {topic: topic, messages: [message]}
+  ], function (err, data) {
+    if (err) console.log(err);
+    else console.log('send %d messages', ++rets);
+    if (rets === count) process.exit();
+  });
+}
